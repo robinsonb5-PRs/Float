@@ -412,8 +412,8 @@ input DFP128 a;	// operand a
 input DFP128 b;	// operand b
 output DFP128 o;	// output
 
-wire DFP128UD o1;
-wire DFP128UN fpn0;
+DFP128UD o1;
+DFP128UN fpn0;
 
 DFPAddsub128 		u1 (clk, ce, rm, op, a, b, o1);
 DFPNormalize128 u2(.clk(clk), .ce(ce), .under_i(1'b0), .i(o1), .o(fpn0) );

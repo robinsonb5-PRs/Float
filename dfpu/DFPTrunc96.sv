@@ -72,9 +72,10 @@ wire [12:0] shamt = (N - 1) - (exp - zeroXp);
 
 genvar g;
 generate begin : gMask
-for (g = 0; g < N; g = g +1)
+for (g = 0; g < N; g = g +1) begin : gloop
 	always_comb
 		mask[g*4+3:g*4] = (g >= shamt) ? 4'hF : 4'h0;
+end
 end
 endgenerate
 

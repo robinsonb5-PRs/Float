@@ -65,11 +65,12 @@ input [BCDWID-1:0] i;
 input lsb;
 begin
 	fnRow = 'd0;
-	for (k = 0; k < BCDWID; k = k + 4)
+	for (k = 0; k < BCDWID; k = k + 4) begin : fnrowloop
 		if (((i >> k) & 4'hF) > 4'd4)
 			fnRow = fnRow | (((i >> k) & 4'hF) + 4'd3) << k;
 		else
 			fnRow = fnRow | ((i >> k) & 4'hf) << k;
+	end
 	fnRow = {fnRow,lsb};
 end
 endfunction
@@ -77,9 +78,10 @@ endfunction
 always_comb
 	bcdw[0] = fnRow(bcdwt,binw[WID-1]);
 generate begin : gRows
-	for (n = 1; n < DEP; n = n + 1)
+	for (n = 1; n < DEP; n = n + 1) begin : growloops
 		always_comb
 			bcdw[n] = fnRow(bcdw[n-1],binw[WID-1-n]);
+	end
 end
 endgenerate
 

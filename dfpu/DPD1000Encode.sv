@@ -50,8 +50,9 @@ output [N*10-1:0] o;
 
 genvar g;
 generate begin : gDPDEncodeN
-	for (g = 0; g < N; g = g + 1)
+	for (g = 0; g < N; g = g + 1) begin : gdpdpeloop
 		DPD1000Encode u1 (i[g*12+11:g*12],o[g*10+9:g*10]);
+	end
 end
 endgenerate
 

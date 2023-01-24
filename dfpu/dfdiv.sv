@@ -85,9 +85,10 @@ reg nz;
 reg [N*2-1:0] zc;
 genvar g;
 generate begin : glzcnt
-	for (g = N*2-1; g >= 0; g = g - 1)
+	for (g = N*2-1; g >= 0; g = g - 1) begin : glzcntloop
 	always_comb
 		zc[g] = qi[g*4+3:g*4]==0;
+	end
 end
 endgenerate
 
@@ -96,8 +97,7 @@ always_comb
 begin
 	nz = 1'b0;
 	lzcnt = 'd0;
-	for (n = N*2-1; n >= 0; n = n - 1)
-	begin
+	for (n = N*2-1; n >= 0; n = n - 1) begin : nloop
 		nz = nz | ~zc[n];
 		if (!nz)
 			lzcnt = lzcnt + 1;

@@ -9,8 +9,8 @@
 //
 // An encoding described in:
 // 	Densely Packed Decimal Encoding, by Mike Cowlishaw, in 
-// 	IEE Proceedings – Computers and Digital Techniques, ISSN 1350-2387,
-// 	Vol. 149, No. 3, pp102–104, IEE, May 2002
+// 	IEE Proceedings ï¿½ Computers and Digital Techniques, ISSN 1350-2387,
+// 	Vol. 149, No. 3, pp102ï¿½104, IEE, May 2002
 //
 // See: http://speleotrove.com/decimal/DPDecimal.html
 //
@@ -76,8 +76,9 @@ output [N*12-1:0] o;
 genvar g;
 
 generate begin : gDPD
-	for (g = 0; g < N; g = g + 1)
+	for (g = 0; g < N; g = g + 1) begin : gdpdloop
 		DPDDecode u1 (i[g*10+9:g*10], o[g*12+11:g*12]);
+	end
 end
 endgenerate
 

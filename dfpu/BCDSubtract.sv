@@ -58,8 +58,9 @@ output [N*4-1:0] o;
 
 genvar g;
 generate begin : gNC
-	for (g = 0; g < N; g = g + 1)
+	for (g = 0; g < N; g = g + 1) begin : gncloop
 		BCDNinesComplement utc1 (i[g*4+3:g*4],o[g*4+3:g*4]);
+	end
 end
 endgenerate
 
@@ -98,8 +99,9 @@ output [N*4-1:0] o;
 
 genvar g;
 generate begin : gTC
-	for (g = 0; g < N; g = g + 1)
+	for (g = 0; g < N; g = g + 1) begin : gtcloop
 		BCDTensComplement utc1 (i[g*4+3:g*4],o[g*4+3:g*4]);
+	end
 end
 endgenerate
 

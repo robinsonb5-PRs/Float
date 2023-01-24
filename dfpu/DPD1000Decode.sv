@@ -47,7 +47,7 @@ genvar g;
 reg [11:0] tbl [0:1023];
 
 generate begin : gDPDTbl
-for (g = 0; g < 1024; g = g + 1) begin
+for (g = 0; g < 1024; g = g + 1) begin : gdpdtblloop
 	initial begin
 		tbl[g] = (g % 10) | (((g / 10) & 15) << 4) | (((g/100) & 15) << 8);
 	end
@@ -71,8 +71,9 @@ output [N*12-1:0] o;
 genvar g;
 
 generate begin : gDPD
-	for (g = 0; g < N; g = g + 1)
+	for (g = 0; g < N; g = g + 1) begin : gdpddloop
 		DPD1000Decode(clk, i[g*10+9:g*10], o[g*12+11:g*12]);
+	end
 end
 endgenerate
 

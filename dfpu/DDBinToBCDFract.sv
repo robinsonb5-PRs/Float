@@ -78,9 +78,10 @@ endfunction
 always_comb
 	bcdw[0] = fnRow(bcdwt,binw[WID-1]);
 generate begin : gRows
-	for (n = 1; n < DEP; n = n + 1)
+	for (n = 1; n < DEP; n = n + 1) begin : growsloop
 		always_comb
 			bcdw[n] = fnRow(bcdw[n-1],binw[WID-1-n]);
+	end
 end
 endgenerate
 

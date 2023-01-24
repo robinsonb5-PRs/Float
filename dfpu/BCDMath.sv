@@ -116,7 +116,7 @@ reg [3:0] cn;
 
 genvar g;
 generate begin :gAdd
-	for (g = 0; g < N; g = g + 1)
+	for (g = 0; g < N; g = g + 1) begin : gaddloop
 	BCDAddNyb u1 (
 		.ci(g==0 ? ci : cg[g-1]),
 		.a(a[g*4+3:g*4]),
@@ -124,6 +124,7 @@ generate begin :gAdd
 		.o(s[g*4+3:g*4]),
 		.c(cg[g])
 	);
+	end
 end
 endgenerate
 
@@ -159,7 +160,7 @@ wire [N*4-1:0] s;
 
 genvar g;
 generate begin :gAdd
-	for (g = 0; g < N; g = g + 1)
+	for (g = 0; g < N; g = g + 1) begin : gaddloop
 	BCDAddNyb u1 (
 		.ci(g==0 ? ci : cg[g-1]),
 		.a(a[g*4+3:g*4]),
@@ -167,6 +168,7 @@ generate begin :gAdd
 		.o(s[g*4+3:g*4]),
 		.c(cg[g])
 	);
+	end
 end
 endgenerate
 
@@ -497,7 +499,7 @@ reg [3:0] n0 [0:255];
 reg [3:0] n1 [0:255];
 reg [3:0] n2 [0:255];
 
-for (g = 0; g < 256; g = g + 1) begin
+for (g = 0; g < 256; g = g + 1) begin : nloop
 	initial begin
 		n0[g] = g % 10;
 		n1[g] = g / 10;
@@ -527,10 +529,11 @@ genvar g;
 generate begin
 always @*
 	c[N] = ci;
-for (g = N - 1; g >= 0; g = g - 1)
+for (g = N - 1; g >= 0; g = g - 1) begin : cnloop
 always @*
 	c[g] = i[g*4];
-for (g = N - 1; g >= 0; g = g - 1)
+end
+for (g = N - 1; g >= 0; g = g - 1) begin : oloop
 always @*
 begin
 	o[g*4+3:g*4] = {1'b0,i[g*4+3:g*4+1]};
@@ -539,6 +542,7 @@ begin
 	// generated
 	if (c[N+1])
 		o[g*4+3:g*4] = o[g*4+3:g*4] + 4'd5;
+end
 end
 	assign co = c[0];
 end

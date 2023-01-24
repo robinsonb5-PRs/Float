@@ -75,12 +75,13 @@ endfunction
 always_comb
 	bcdw[0] = bcdwt;
 generate begin : gRows
-	for (n = 0; n < DEP; n = n + 1)
+	for (n = 0; n < DEP; n = n + 1) begin : growsloop
 		always_comb
 		begin
 			binwt[WID-DEP+n] = bcdw[n][0];
 			bcdw[n+1] = fnRow({1'b0,bcdw[n][BCDWID-1:1]});
 		end
+	end
 end
 endgenerate
 

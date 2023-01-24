@@ -77,8 +77,8 @@ wire [N-1:0] d [0:2];
 
 genvar g,k;
 generate begin : gBCDadd
-for (k = 0; k < 3; k = k + 1) begin
-	for (g = 0; g < N; g = g + 1) begin
+for (k = 0; k < 3; k = k + 1) begin : addouter
+	for (g = 0; g < N; g = g + 1) begin : addinner
 		initial begin
 			c[k][g] <= 'b0;
 		end
@@ -90,7 +90,7 @@ for (k = 0; k < 3; k = k + 1) begin
 			.c(d[k][g])
 		);
 		always_ff @(posedge clk)
-			o2[k] <= o1[k];
+			o2[k][g] <= o1[k][g];
 		always_ff @(posedge clk)
 			c[k][g] <= d[k][g];
 	end

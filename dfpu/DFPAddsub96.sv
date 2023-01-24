@@ -404,8 +404,8 @@ input DFP96 a;	// operand a
 input DFP96 b;	// operand b
 output DFP96 o;	// output
 
-wire DFP96UD o1;
-wire DFP96UN fpn0;
+DFP96UD o1;
+DFP96UN fpn0;
 
 DFPAddsub96 		u1 (clk, ce, rm, op, a, b, o1);
 DFPNormalize96  u2(.clk(clk), .ce(ce), .under_i(1'b0), .i(o1), .o(fpn0) );

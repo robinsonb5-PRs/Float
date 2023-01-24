@@ -67,7 +67,7 @@ always_comb
 	ou.qnan = iu.qnan;
 always_comb
 	ou.snan = iu.snan;
-always_comb]
+always_comb
 	ou.sig = {iu.sig,72'd0};
 
 DFPPack96 u2 (ou, o);

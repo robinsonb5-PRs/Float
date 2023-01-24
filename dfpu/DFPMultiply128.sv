@@ -147,7 +147,7 @@ ft_delay #(.WID(1),.DEP(DELAY)) u7  (.clk(clk), .ce(ce), .i(over), .o(over1) );
 
 // determine when a NaN is output
 wire qNaNOut;
-wire DFP128U a1,b1;
+DFP128U a1, b1;
 wire asnan, bsnan, aqnan, bqnan;
 ft_delay #(.WID(1),.DEP(DELAY)) u5 (.clk(clk), .ce(ce), .i((au.infinity&bz)|(bu.infinity&az)), .o(qNaNOut) );
 ft_delay #(.WID(1),.DEP(DELAY)) u14 (.clk(clk), .ce(ce), .i(au.nan), .o(aNan1) );
